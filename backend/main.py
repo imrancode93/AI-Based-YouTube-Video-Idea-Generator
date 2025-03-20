@@ -33,7 +33,11 @@ def generate_video_ideas(
         trending_videos = [{"title": "No trending videos found", "url": "#"}]
 
     # ✅ Generate YouTube Video Ideas using OpenAI
-    prompt = f"Generate 5 engaging YouTube video ideas on '{topic}' for '{audience}' that are currently trending."
+    prompt = f"""
+    Generate 5 engaging YouTube video ideas on '{topic}' for '{audience}' that are currently trending.
+    Consider these trending keywords: {', '.join(trending_keywords)}.
+    Use insights from these trending YouTube videos: {', '.join([video['title'] for video in trending_videos])}.
+    """
 
     try:
         response = openai.chat.completions.create(
